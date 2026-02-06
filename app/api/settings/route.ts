@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { ensureSeeded } from '@/lib/auto-seed'
 
 export async function GET() {
   try {
+    await ensureSeeded()
     const settings = await prisma.siteSettings.findFirst({
       orderBy: { updatedAt: 'desc' }
     })

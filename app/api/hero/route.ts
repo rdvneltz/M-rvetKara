@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { ensureSeeded } from '@/lib/auto-seed'
 
 export async function GET() {
   try {
+    await ensureSeeded()
     const hero = await prisma.heroSection.findFirst({
       where: { active: true },
-      orderBy: { updatedAt: 'desc' } // En son güncellenen aktif hero'yu getir
+      orderBy: { updatedAt: 'desc' }
     })
     return NextResponse.json(hero)
   } catch (error) {
