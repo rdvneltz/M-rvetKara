@@ -5,34 +5,33 @@ let isSeeded = false
 
 /**
  * Veritabanı boşsa otomatik olarak başlangıç verilerini oluşturur.
- * Uygulama ilk çalıştığında bir kez çalışır, sonraki isteklerde atlanır.
+ * Her tablo bağımsız kontrol edilir - kısmi seed durumlarını düzeltir.
  */
 export async function ensureSeeded() {
   if (isSeeded) return
 
   try {
-    // Admin kullanıcı var mı kontrol et
-    const userCount = await prisma.user.count()
-    if (userCount > 0) {
-      isSeeded = true
-      return
-    }
-
-    console.log('[auto-seed] Veritabanı boş, başlangıç verileri oluşturuluyor...')
+    // Her tabloyu bağımsız kontrol et ve gerekiyorsa oluştur
+    // Bu sayede kısmi seed durumlarında eksik veriler tamamlanır
 
     // Admin kullanıcı
-    const hashedPassword = await bcrypt.hash('admin123', 12)
-    await prisma.user.create({
-      data: {
-        email: 'admin@murvetkara.com',
-        password: hashedPassword,
-        name: 'Admin',
-      },
-    })
+    const userCount = await prisma.user.count()
+    if (userCount === 0) {
+      console.log('[auto-seed] Admin kullanıcı oluşturuluyor...')
+      const hashedPassword = await bcrypt.hash('admin123', 12)
+      await prisma.user.create({
+        data: {
+          email: 'admin@murvetkara.com',
+          password: hashedPassword,
+          name: 'Admin',
+        },
+      })
+    }
 
     // Hero section
     const heroCount = await prisma.heroSection.count()
     if (heroCount === 0) {
+      console.log('[auto-seed] Hero section oluşturuluyor...')
       await prisma.heroSection.create({
         data: {
           title: 'MÜRVET KARA',
@@ -51,6 +50,7 @@ export async function ensureSeeded() {
     // Hakkımızda
     const aboutCount = await prisma.aboutSection.count()
     if (aboutCount === 0) {
+      console.log('[auto-seed] About section oluşturuluyor...')
       await prisma.aboutSection.create({
         data: {
           title: 'Mürvet Kara Hakkında',
@@ -66,6 +66,7 @@ export async function ensureSeeded() {
     // İletişim bilgileri
     const contactCount = await prisma.contactInfo.count()
     if (contactCount === 0) {
+      console.log('[auto-seed] Contact info oluşturuluyor...')
       await prisma.contactInfo.create({
         data: {
           address: 'Admin panelden güncelleyiniz',
@@ -79,6 +80,7 @@ export async function ensureSeeded() {
     // Site ayarları
     const settingsCount = await prisma.siteSettings.count()
     if (settingsCount === 0) {
+      console.log('[auto-seed] Site settings oluşturuluyor...')
       await prisma.siteSettings.create({
         data: {
           siteName: 'Mürvet Kara',
@@ -114,10 +116,10 @@ export async function ensureSeeded() {
     }
 
     isSeeded = true
-    console.log('[auto-seed] Başlangıç verileri oluşturuldu!')
-    console.log('[auto-seed] Admin: admin@murvetkara.com / admin123')
+    console.log('[auto-seed] Tüm veriler hazır!')
   } catch (error) {
     console.error('[auto-seed] Hata:', error)
-    throw error
+    // Hata fırlatma - seed başarısız olsa bile sayfa yüklenmeli
+    // Bir sonraki istekte tekrar denenecek (isSeeded hâlâ false)
   }
 }
