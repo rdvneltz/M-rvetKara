@@ -325,8 +325,8 @@ export default function Home() {
             className="mb-12"
           >
             <Image
-              src={hero.logo || "/assets/fofora-logo.png"}
-              alt="Fofora Tiyatro"
+              src={hero.logo || "/assets/mk-logo.png"}
+              alt="Mürvet Kara"
               width={hero.logoWidth || 200}
               height={hero.logoHeight || 200}
               className="mx-auto drop-shadow-2xl"
@@ -807,7 +807,7 @@ export default function Home() {
             </p>
 
             <motion.a
-              href="https://www.instagram.com/foforatiyatro/"
+              href=""
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
@@ -815,7 +815,7 @@ export default function Home() {
               className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:from-purple-700 hover:to-pink-700 transition-all"
             >
               <Instagram className="w-6 h-6" />
-              @foforatiyatro
+              @murvetkara
             </motion.a>
 
             {instagramPosts.length > 0 ? (
@@ -849,7 +849,7 @@ export default function Home() {
                 {[1, 2, 3, 4].map((index) => (
                   <motion.a
                     key={index}
-                    href="https://www.instagram.com/foforatiyatro/"
+                    href=""
                     target="_blank"
                     rel="noopener noreferrer"
                     initial={{ opacity: 0, scale: 0.8 }}

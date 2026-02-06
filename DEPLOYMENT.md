@@ -1,4 +1,4 @@
-# Fofora Tiyatro - Deployment Rehberi
+# Mürvet Kara - Deployment Rehberi
 
 ## 🗄️ MongoDB Atlas Kurulumu
 
@@ -11,14 +11,14 @@
 - **Shared (FREE)** seç
 - Provider: AWS
 - Region: Frankfurt (eu-central-1) veya Türkiye'ye yakın
-- Cluster Name: `fofora-tiyatro`
+- Cluster Name: `murvetkara`
 - "Create Cluster" (2-3 dakika bekle)
 
 ### 3. Database User Oluştur
 - Sol menü → **"Database Access"**
 - "Add New Database User"
 - Authentication: Password
-- Username: `foforaadmin`
+- Username: `murvetkaraadmin`
 - Password: Güçlü bir şifre oluştur (KAYDET!)
 - Privileges: "Read and write to any database"
 - "Add User"
@@ -37,7 +37,7 @@
 
 **Örnek:**
 ```
-mongodb+srv://foforaadmin:MyPassword123@cluster0.abc123.mongodb.net/foforatiyatro?retryWrites=true&w=majority
+mongodb+srv://murvetkaraadmin:MyPassword123@cluster0.abc123.mongodb.net/murvetkara?retryWrites=true&w=majority
 ```
 
 ---
@@ -47,13 +47,13 @@ mongodb+srv://foforaadmin:MyPassword123@cluster0.abc123.mongodb.net/foforatiyatr
 ### 1. GitHub Repository İzinleri
 - https://github.com/settings/installations
 - "Vercel" uygulamasını bul → "Configure"
-- Repository access → `Fofora-Tiyatro` ekle → "Save"
+- Repository access → `M-rvetKara` ekle → "Save"
 
 ### 2. Vercel'de Environment Variables
 Deploy etmeden ÖNCE veya sonrasında ekle:
 
 ```
-DATABASE_URL = mongodb+srv://foforaadmin:SİFREN@cluster0.xxxxx.mongodb.net/foforatiyatro?retryWrites=true&w=majority
+DATABASE_URL = mongodb+srv://murvetkaraadmin:SİFREN@cluster0.xxxxx.mongodb.net/murvetkara?retryWrites=true&w=majority
 
 NEXTAUTH_URL = https://your-project-name.vercel.app
 
@@ -69,5 +69,5 @@ npm run seed
 ---
 
 ## 🔑 Admin Giriş
-- Email: admin@foforatiyatro.com
+- Email: admin@murvetkara.com
 - Şifre: admin123

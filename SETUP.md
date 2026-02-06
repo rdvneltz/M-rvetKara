@@ -1,4 +1,4 @@
-# 🚀 Mürekkep Hukuk Web Sitesi - Kurulum Rehberi
+# 🚀 Mürvet Kara Web Sitesi - Kurulum Rehberi
 
 ## 📋 Gereksinimler
 
@@ -23,14 +23,14 @@
 
 ```env
 # MongoDB connection string'inizi buraya yapıştırın
-DATABASE_URL="mongodb+srv://kullanici:sifre@cluster0.xxxxx.mongodb.net/murekkephukuk?retryWrites=true&w=majority"
+DATABASE_URL="mongodb+srv://kullanici:sifre@cluster0.xxxxx.mongodb.net/murvetkara?retryWrites=true&w=majority"
 
 # Bu ayarları olduğu gibi bırakabilirsiniz
 NEXTAUTH_URL="http://localhost:3000"
 NEXTAUTH_SECRET="your-secret-key-change-this-in-production"
 
 # Admin giriş bilgileri (istediğiniz gibi değiştirebilirsiniz)
-ADMIN_EMAIL="admin@murekkephukuk.com"
+ADMIN_EMAIL="admin@murvetkara.com"
 ADMIN_PASSWORD="admin123"
 ```
 
@@ -57,13 +57,13 @@ Site `http://localhost:3000` adresinde çalışacaktır! 🎉
 ## 🔐 Admin Panel Erişimi
 
 - **URL:** `http://localhost:3000/admin/login`
-- **Email:** admin@murekkephukuk.com (veya .env.local'de tanımladığınız)
+- **Email:** admin@murvetkara.com (veya .env.local'de tanımladığınız)
 - **Şifre:** admin123 (veya .env.local'de tanımladığınız)
 
 ## 📁 Proje Yapısı
 
 ```
-murekkephukuk/
+murvetkara/
 ├── app/                      # Next.js 15 App Router
 │   ├── api/                 # API Routes
 │   │   ├── auth/           # NextAuth authentication
@@ -94,8 +94,8 @@ murekkephukuk/
 ### Logo ve Görseller
 
 Logolar ve görseller `public/assets/` klasöründedir:
-- `murekkep-logo-saydam.png` - Ana logo
-- `av-faruk-celep-foto.jpeg` - Avukat fotoğrafı
+- `mk-logo.png` - Ana logo
+- `mk-logo.png` - Logo
 - `gotham font/` - Gotham font dosyaları
 
 ### Renkler
@@ -108,11 +108,11 @@ Renkleri `tailwind.config.ts` dosyasından özelleştirebilirsiniz:
 
 Tüm içerikler admin panelden yönetilir:
 - **Hero Bölümü:** Ana sayfa başlığı ve alt başlığı
-- **Hizmetler:** Hukuki hizmetler
-- **Ekip:** Avukat ve ekip üyeleri
-- **Hakkımızda:** Büro bilgileri
+- **Hizmetler:** Hizmetler
+- **Ekip:** Ekip üyeleri
+- **Hakkımızda:** Kurum bilgileri
 - **İletişim:** İletişim bilgileri
-- **Yorumlar:** Müvekkil yorumları
+- **Yorumlar:** Müşteri yorumları
 - **Blog:** Blog yazıları
 - **Site Ayarları:** Genel site ayarları
 

@@ -6,7 +6,7 @@ echo "Test video content" > /tmp/test-r2.txt
 # R2 Credentials
 ACCESS_KEY="970d413506a466cffa0f98966c973404"
 SECRET_KEY="1132a830ea9ea1ad7817be0bc827eb666def3602015e670d37911079e6ce2bf8"
-BUCKET="fofora-tiytro-videos"
+BUCKET="murvetkara-files"
 ACCOUNT_ID="4ad9a16037171b6689602b13bbbe6be8"
 ENDPOINT="https://${ACCOUNT_ID}.r2.cloudflarestorage.com"
 

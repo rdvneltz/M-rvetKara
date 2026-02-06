@@ -37,12 +37,12 @@ export default function AdminSettings() {
   const { data: session, status } = useSession()
   const router = useRouter()
   const [settings, setSettings] = useState<SiteSettings>({
-    siteName: 'Fofora Tiyatro',
-    siteTitle: 'Fofora Tiyatro - Sahnenin Gücü',
-    description: 'Tiyatro eğitimi için profesyonel, yaratıcı ve ilham verici programlar sunuyoruz',
+    siteName: 'Mürvet Kara',
+    siteTitle: 'Mürvet Kara - Communication & Management',
+    description: 'Profesyonel iletişim danışmanlığı ve yönetim hizmetleri',
     primaryColor: '#c19a6b',
     secondaryColor: '#243b53',
-    footerText: '© 2024 Fofora Tiyatro. Tüm hakları saklıdır.',
+    footerText: '© 2025 Mürvet Kara Communication & Management. Tüm hakları saklıdır.',
     socialMedia: [
       { platform: 'instagram', url: '', active: false },
       { platform: 'youtube', url: '', active: false }
@@ -224,7 +224,7 @@ export default function AdminSettings() {
                   value={settings.siteName}
                   onChange={(e) => setSettings({ ...settings, siteName: e.target.value })}
                   className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-gold-500"
-                  placeholder="Fofora Tiyatro"
+                  placeholder="Mürvet Kara"
                 />
               </div>
 
@@ -236,7 +236,7 @@ export default function AdminSettings() {
                   value={settings.siteTitle}
                   onChange={(e) => setSettings({ ...settings, siteTitle: e.target.value })}
                   className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-gold-500"
-                  placeholder="Fofora Tiyatro - Sahnenin Gücü"
+                  placeholder="Mürvet Kara - Communication & Management"
                 />
               </div>
 
@@ -259,7 +259,7 @@ export default function AdminSettings() {
                   value={settings.footerText || ''}
                   onChange={(e) => setSettings({ ...settings, footerText: e.target.value })}
                   className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-gold-500"
-                  placeholder="© 2024 Fofora Tiyatro. Tüm hakları saklıdır."
+                  placeholder="© 2025 Mürvet Kara Communication & Management. Tüm hakları saklıdır."
                 />
               </div>
             </div>

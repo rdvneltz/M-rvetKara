@@ -12,10 +12,10 @@ async function main() {
   const hashedPassword = await bcrypt.hash('admin123', 12)
 
   await prisma.user.upsert({
-    where: { email: 'admin@foforatiyatro.com' },
+    where: { email: 'admin@murvetkara.com' },
     update: {},
     create: {
-      email: 'admin@foforatiyatro.com',
+      email: 'admin@murvetkara.com',
       password: hashedPassword,
       name: 'Admin',
     },
@@ -26,12 +26,12 @@ async function main() {
   if (heroCount === 0) {
     await prisma.heroSection.create({
       data: {
-        title: 'FOFORA TİYATRO',
-        subtitle: 'Sahnenin Büyüsüyle Kendini Yeniden Keşfet',
-        description: 'Boşluk sanatın sahnesidir - Her yaştan bireylere tiyatro eğitimi ile yaratıcılığını keşfet',
-        buttonText: 'Hemen Kayıt Ol',
+        title: 'MÜRVET KARA',
+        subtitle: 'Communication & Management',
+        description: 'Profesyonel iletişim danışmanlığı ve yönetim hizmetleri',
+        buttonText: 'Bizimle İletişime Geçin',
         buttonLink: '#contact',
-        logo: '/assets/fofora-logo.png',
+        logo: '/assets/mk-logo.png',
         logoWidth: 250,
         logoHeight: 250,
         active: true,
@@ -39,89 +39,19 @@ async function main() {
     })
   }
 
-  // Eğitim Programları
-  const programs = [
-    {
-      title: 'Çocuk Drama ve Oyun Atölyesi',
-      description: '4-6, 7-9 ve 10-12 yaş grupları için özel drama eğitimi',
-      icon: 'Users',
-      details: 'Çocukların hayal gücünü geliştiren, özgüven kazandıran ve takım çalışması becerilerini güçlendiren drama atölyesi. Her yaş grubuna özel içerik ve metodlarla çocukların sanatsal gelişimini destekliyoruz.',
-      image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&auto=format&fit=crop',
-      ageGroup: '4-12 yaş',
-      duration: '3 ay',
-      order: 1,
-      active: true,
-    },
-    {
-      title: 'Gençlik Tiyatro Atölyesi',
-      description: '13-17 yaş arası gençler için sahne sanatları eğitimi',
-      icon: 'Award',
-      details: 'Gençlerin kendini ifade etmesini sağlayan, sanat terapisi unsurları içeren tiyatro atölyesi. Sahne sanatları, doğaçlama, diksiyon ve karakter çalışmaları ile kapsamlı bir eğitim.',
-      image: 'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=800&auto=format&fit=crop',
-      ageGroup: '13-17 yaş',
-      duration: '6 ay',
-      order: 2,
-      active: true,
-    },
-    {
-      title: 'Yetişkin Oyun Oluşturma Atölyesi',
-      description: '18+ yetişkinler için performans ve kişisel gelişim',
-      icon: 'Star',
-      details: 'Yetişkinlerin kendini yeniden keşfetmesini sağlayan, sanat terapisi ve performans becerileri geliştiren atölye. Oyun oluşturma sürecinde aktif rol alarak yaratıcılığınızı ortaya çıkarın.',
-      image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&auto=format&fit=crop',
-      ageGroup: '18+ Yetişkin',
-      duration: '6 ay',
-      order: 3,
-      active: true,
-    },
-    {
-      title: 'Konservatuvar Hazırlık Eğitimi',
-      description: 'Konservatuvar sınavlarına özel hazırlık programı',
-      icon: 'BookOpen',
-      details: 'Konservatuvar tiyatro bölümlerine hazırlanan öğrenciler için kapsamlı eğitim programı. Monolog çalışması, sahne performansı, diksiyon ve sınav teknikleri.',
-      image: 'https://images.unsplash.com/photo-1519163219899-21d2bb723b3e?w=800&auto=format&fit=crop',
-      order: 4,
-      active: true,
-    },
-    {
-      title: 'Diksiyon Eğitimi',
-      description: 'Doğru ve etkili konuşma sanatı',
-      icon: 'FileText',
-      details: 'Ses teknikleri, nefes çalışması, telaffuz ve doğru konuşma eğitimi. Günlük hayatta ve sahne performanslarında etkili iletişim becerileri kazanın.',
-      image: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&auto=format&fit=crop',
-      order: 5,
-      active: true,
-    },
-  ]
-
-  // Programları ekle - sadece title yoksa
-  for (const program of programs) {
-    const exists = await prisma.service.findFirst({
-      where: { title: program.title }
-    })
-    if (!exists) {
-      await prisma.service.create({
-        data: program,
-      })
-    }
-  }
-
   // Hakkımızda - sadece yoksa ekle
   const aboutCount = await prisma.aboutSection.count()
   if (aboutCount === 0) {
     await prisma.aboutSection.create({
     data: {
-      title: 'Fofora Tiyatro Hakkında',
-      content: 'Fofora Tiyatro olarak, 4 yaşından yetişkinlere kadar her yaş grubuna özel tiyatro eğitimi sunuyoruz. Sanatın dönüştürücü gücüne inanarak, her bireyin içindeki yaratıcılığı ve özgüveni ortaya çıkarmayı hedefliyoruz. İcadiye, Üsküdar\'daki modern atölye mekanımızda profesyonel eğitmenlerimiz eşliğinde tiyatro yolculuğunuza başlayın.',
-      mission: 'Her yaştan bireye tiyatro sanatı aracılığıyla kendini ifade etme, yaratıcılığını keşfetme ve özgüven kazanma fırsatı sunmak.',
-      vision: 'Türkiye\'nin önde gelen tiyatro eğitim kurumlarından biri olmak ve tiyatro sanatını toplumun her kesimine ulaştırmak.',
+      title: 'Mürvet Kara Hakkında',
+      content: 'Mürvet Kara Communication & Management olarak, profesyonel iletişim danışmanlığı ve yönetim hizmetleri sunuyoruz. İçeriği admin panelden güncelleyebilirsiniz.',
+      mission: 'Admin panelden güncelleyiniz.',
+      vision: 'Admin panelden güncelleyiniz.',
       values: [
-        'Yaratıcılık ve İfade Özgürlüğü',
-        'Sanatsal Mükemmellik',
-        'Kişisel Gelişim ve Özgüven',
-        'Takım Çalışması ve İşbirliği',
-        'Sürekli Öğrenme',
-        'Sanatla Dönüşüm'
+        'Profesyonellik',
+        'Güvenilirlik',
+        'Yenilikçilik',
       ],
       active: true,
     },
@@ -133,10 +63,10 @@ async function main() {
   if (contactCount === 0) {
     await prisma.contactInfo.create({
     data: {
-      address: 'İcadiye mh. Haşacıraf sk. şirin apt. no:26 kapı:2, Üsküdar/İstanbul',
-      phone: '+90 538 496 26 24',
-      email: 'foforatiyatro@gmail.com',
-      workingHours: 'Pazartesi - Cumartesi: 10:00 - 20:00',
+      address: 'Admin panelden güncelleyiniz',
+      phone: '+90 000 000 00 00',
+      email: 'info@murvetkara.com',
+      workingHours: 'Pazartesi - Cuma: 09:00 - 18:00',
     },
   })
   }
@@ -146,16 +76,16 @@ async function main() {
   if (settingsCount === 0) {
     await prisma.siteSettings.create({
     data: {
-      siteName: 'Fofora Tiyatro',
-      siteTitle: 'Fofora Tiyatro | Sahnenin Büyüsüyle Kendini Yeniden Keşfet',
-      description: 'Fofora Tiyatro - İstanbul Üsküdar merkezli tiyatro eğitimi, drama atölyeleri ve oyunculuk kursları. 4 yaşından yetişkinlere kadar tiyatro eğitimi.',
-      logo: '/assets/fofora-logo.png',
+      siteName: 'Mürvet Kara',
+      siteTitle: 'Mürvet Kara | Communication & Management',
+      description: 'Mürvet Kara Communication & Management - Profesyonel iletişim danışmanlığı ve yönetim hizmetleri.',
+      logo: '/assets/mk-logo.png',
       primaryColor: '#c19a6b',
       secondaryColor: '#243b53',
-      footerText: '© 2024 Fofora Tiyatro. Tüm hakları saklıdır.',
+      footerText: '© 2025 Mürvet Kara Communication & Management. Tüm hakları saklıdır.',
       socialMedia: {
-        instagram: 'https://instagram.com/foforatiyatro',
-        whatsapp: 'https://wa.me/905384962624',
+        instagram: '',
+        whatsapp: '',
       },
       sectionVisibility: {
         hero: true,
@@ -166,84 +96,24 @@ async function main() {
         blog: true,
         contact: true,
       },
-      copyrightText: '© 2024 Fofora Tiyatro. Sahnenin büyüsüyle hayatınızı dönüştürün.',
+      copyrightText: '© 2025 Mürvet Kara Communication & Management. Tüm hakları saklıdır.',
       appointmentFormSettings: {
         consultationTypes: [
-          'Çocuk Drama Atölyesi (4-6 yaş)',
-          'Çocuk Drama Atölyesi (7-9 yaş)',
-          'Çocuk Drama Atölyesi (10-12 yaş)',
-          'Gençlik Tiyatro Atölyesi (13-17 yaş)',
-          'Yetişkin Oyun Oluşturma',
-          'Konservatuvar Hazırlık',
-          'Diksiyon Eğitimi',
           'Genel Bilgi'
         ],
-        showLawyerSelection: true,
+        showLawyerSelection: false,
         descriptionLabel: 'Mesajınız veya özel talepleriniz'
       }
     },
   })
   }
 
-  // Örnek blog yazıları - slug'a göre upsert
-  await prisma.blogPost.upsert({
-    where: { slug: 'tiyatro-egitimi-neden-onemli' },
-    update: {},
-    create: {
-      title: 'Tiyatro Eğitimi Neden Önemli?',
-      slug: 'tiyatro-egitimi-neden-onemli',
-      excerpt: 'Tiyatro eğitiminin çocukların ve yetişkinlerin gelişimine katkıları hakkında bilmeniz gerekenler.',
-      content: `Tiyatro eğitimi, sadece sahne performansı yapmayı öğrenmek değildir. Aynı zamanda kişisel gelişim, özgüven kazanma ve yaratıcılığı keşfetme yolculuğudur.
-
-Tiyatro eğitiminin faydaları:
-
-1. Özgüven Gelişimi: Sahne deneyimi, bireylerin kendilerini ifade etme becerisini güçlendirir.
-
-2. Yaratıcılık: İmprovizasyon ve oyun oluşturma süreçleri yaratıcı düşünmeyi destekler.
-
-3. İletişim Becerileri: Diksiyon, beden dili ve etkili iletişim teknikleri öğrenilir.
-
-4. Takım Çalışması: Tiyatro doğası gereği işbirliği gerektirir ve sosyal becerileri geliştirir.
-
-5. Empati: Farklı karakterleri canlandırmak, başkalarının duygularını anlamayı kolaylaştırır.
-
-Fofora Tiyatro olarak, her yaş grubuna özel programlarımızla bu becerileri kazandırıyoruz.`,
-      image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&auto=format&fit=crop',
-      category: 'Eğitim',
-      tags: ['Tiyatro', 'Eğitim', 'Çocuk Gelişimi', 'Sanat'],
-      published: true,
-    }
-  })
-
-  await prisma.blogPost.upsert({
-    where: { slug: 'sen-kimsin-cocuk-oyunu' },
-    update: {},
-    create: {
-      title: 'Sen Kimsin? - Çocuk Oyunumuz Sahnede',
-      slug: 'sen-kimsin-cocuk-oyunu',
-      excerpt: 'Çocuk Drama Atölyesi öğrencilerimizin hazırladığı "Sen Kimsin?" oyunumuz seyirciyle buluştu.',
-      content: `Çocuk Drama Atölyesi öğrencilerimiz, aylardır üzerinde çalıştıkları "Sen Kimsin?" oyununu başarıyla sergilediler.
-
-Oyun, kimlik arayışı ve kendini keşfetme temalarını çocukların dünyasından yansıtıyor. Her bir öğrencimiz, bu süreçte büyük bir gelişim gösterdi.
-
-Prova sürecinde öğrencilerimiz:
-- Karakter analizi yaptılar
-- Beden dili ve mimiklerini geliştirdiler
-- Diksiyon çalışmaları gerçekleştirdiler
-- Takım çalışması deneyimi yaşadılar
-
-Velilerimiz ve seyircilerimizin yoğun ilgisiyle karşılanan oyun, tüm ekibimiz için unutulmaz bir deneyim oldu.`,
-      image: 'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=800&auto=format&fit=crop',
-      category: 'Etkinlikler',
-      tags: ['Oyun', 'Çocuk Tiyatrosu', 'Performans'],
-      published: true,
-    }
-  })
-
-  console.log('Seed tamamlandı! Fofora Tiyatro veritabanı hazır.')
+  console.log('Seed tamamlandı! Mürvet Kara veritabanı hazır.')
   console.log('Admin bilgileri:')
-  console.log('Email: admin@foforatiyatro.com')
+  console.log('Email: admin@murvetkara.com')
   console.log('Şifre: admin123')
+  console.log('')
+  console.log('ÖNEMLİ: İlk girişten sonra admin şifrenizi değiştirin!')
 }
 
 main()

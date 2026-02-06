@@ -46,15 +46,15 @@ export default function LoginPage() {
           <div className="text-center mb-8">
             <div className="flex justify-center mb-6">
               <Image
-                src="/assets/fofora-logo.png"
-                alt="Fofora Tiyatro"
+                src="/assets/mk-logo.png"
+                alt="Mürvet Kara"
                 width={120}
                 height={120}
                 className="drop-shadow-2xl"
               />
             </div>
             <h1 className="text-3xl font-bold text-white mb-2">Admin Panel</h1>
-            <p className="text-gold-300">Fofora Tiyatro Okulu</p>
+            <p className="text-gold-300">Mürvet Kara Communication & Management</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -68,7 +68,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition"
-                placeholder="admin@foforatiyatro.com"
+                placeholder="admin@murvetkara.com"
                 required
               />
             </div>
@@ -105,7 +105,7 @@ export default function LoginPage() {
         </div>
 
         <p className="text-center text-white/60 text-sm mt-6">
-          © 2024 Fofora Tiyatro. Tüm hakları saklıdır.
+          © 2025 Mürvet Kara Communication & Management. Tüm hakları saklıdır.
         </p>
       </div>
     </div>

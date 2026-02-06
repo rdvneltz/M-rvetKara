@@ -6,7 +6,7 @@ Seed script ile otomatik olarak oluşturulacak içerikler:
 
 - ✅ **8 Hukuk Hizmeti**: Ticaret, Ceza, Aile, İş, Gayrimenkul, Miras, Sigorta, Tüketici Hukuku
 - ✅ **7 Ekip Üyesi**: 6 Avukat + 1 Basın Danışmanı (stock fotoğraflarla)
-- ✅ **4 Blog Yazısı**: SEO uyumlu, profesyonel hukuk içerikleri
+- ✅ **4 Blog Yazısı**: SEO uyumlu, profesyonel hizmet içerikleri
 - ✅ **5 Müvekkil Görüşü**: 5 yıldızlı referanslar
 - ✅ **21 Hero Videosu**: Mevcut video referansları
 - ✅ **Site Ayarları**: Logo, renkler, sosyal medya linkleri
@@ -23,7 +23,7 @@ Projenizin root klasöründe `.env.local` dosyası oluşturun:
 ```bash
 DATABASE_URL="your_mongodb_connection_string_from_vercel"
 NEXTAUTH_SECRET="your_nextauth_secret"
-NEXTAUTH_URL="https://murekkephukuk.vercel.app"
+NEXTAUTH_URL="https://murvetkara.vercel.app"
 ```
 
 💡 **MongoDB URL'i Nereden Alırım?**
@@ -113,7 +113,7 @@ Eğer otomatik script çalıştırmak istemiyorsanız, admin panelden manuel ola
 
 ### Blog:
 1. Admin Panel > Blog > Yeni Yazı
-2. ChatGPT'den hukuk konularında yazı isteyin
+2. ChatGPT'den hizmet konularında yazı isteyin
 
 ## ⚠️ ÖNEMLİ NOTLAR
 
@@ -139,7 +139,7 @@ Eğer otomatik script çalıştırmak istemiyorsanız, admin panelden manuel ola
 
 ## ✅ İşlem Tamamlandı mı?
 
-Tarayıcıda https://murekkephukuk.vercel.app adresini açın ve kontrol edin:
+Tarayıcıda https://murvetkara.vercel.app adresini açın ve kontrol edin:
 - ✅ Anasayfa hero bölümü dolu
 - ✅ Hizmetler listeleniyor (8 adet)
 - ✅ Ekip üyeleri görünüyor (7 kişi)

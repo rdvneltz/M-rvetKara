@@ -1,93 +1,55 @@
-# Mürekkep Hukuk Bürosu Web Sitesi
+# Mürvet Kara Communication & Management
 
-Modern, dinamik ve tamamen yönetilebilir bir hukuk bürosu web sitesi.
+Modern, dinamik ve tamamen yonetilebilir kurumsal web sitesi.
 
-## 🚀 Özellikler
+## Teknolojiler
 
-- **Sinematik Hero Section** - Etkileyici giriş sayfası animasyonları
-- **Dinamik İçerik Yönetimi** - Tüm içerikler admin panelden kontrol edilebilir
-- **Responsive Tasarım** - Tüm cihazlarda mükemmel görüntü
-- **Modern Animasyonlar** - Framer Motion ile akıcı geçişler
-- **Admin Paneli** - Güvenli ve kullanıcı dostu yönetim paneli
-- **MongoDB Veritabanı** - Ölçeklenebilir veri yönetimi
-
-## 📦 Teknolojiler
-
-- Next.js 15
+- Next.js 15 (App Router)
 - TypeScript
 - Tailwind CSS
 - Framer Motion
 - Prisma + MongoDB
 - NextAuth.js
-- React
+- Cloudflare R2 (dosya depolama)
 
-## 🛠️ Kurulum
+## Hizli Kurulum
 
-1. Bağımlılıkları yükleyin:
 ```bash
 npm install
-```
-
-2. `.env.local` dosyasını düzenleyin:
-- MongoDB connection string ekleyin
-- NextAuth secret key ayarlayın
-
-3. Prisma'yı ayarlayın:
-```bash
+cp .env.example .env.local  # Sonra icindeki degerleri doldurun
 npx prisma generate
-```
-
-4. İlk admin kullanıcısı oluşturun:
-```bash
-npx prisma db seed
-```
-
-5. Geliştirme sunucusunu başlatın:
-```bash
+npm run seed
 npm run dev
 ```
 
-Site `http://localhost:3000` adresinde çalışacaktır.
+Site `http://localhost:3000` adresinde calisacaktir.
 
-## 📱 Admin Panel
+## Admin Panel
 
-Admin panele `http://localhost:3000/admin/login` adresinden erişebilirsiniz.
+- **URL:** `http://localhost:3000/admin/login`
+- **Email:** admin@murvetkara.com
+- **Sifre:** admin123
 
-**Varsayılan Giriş Bilgileri:**
-- Email: admin@murekkephukuk.com
-- Şifre: admin123
+**ONEMLI:** Ilk giristen sonra admin sifresini degistirin!
 
-⚠️ **Önemli:** Canlı ortama geçmeden önce admin şifresini değiştirin!
+## Admin Panel Modulleri
 
-## 🎨 Özelleştirme
+- Hero Bolumu & Videolari
+- Hizmetler / Programlar
+- Ekip Uyeleri
+- Hakkimizda
+- Iletisim Bilgileri
+- Randevu / Kayit Sistemi
+- Yorumlar
+- Blog
+- Instagram Entegrasyonu
+- Footer & Yasal Linkler
+- Site Ayarlari (renk, logo, bolum sirasi)
 
-### Renkler
-`tailwind.config.ts` dosyasından renkleri özelleştirebilirsiniz.
+## Altyapi Kurulumu
 
-### Fontlar
-Gotham fontları `public/assets/gotham font/` dizininde bulunmaktadır.
+Tum altyapi kurulum adimlari icin **INFRASTRUCTURE.md** dosyasina bakin.
 
-### Logo ve Görseller
-- Logo: `public/assets/murekkep-logo-saydam.png`
-- Avukat Fotoğrafı: `public/assets/av. faruk celep foto.jpeg`
+## Lisans
 
-## 📋 Admin Panel Modülleri
-
-- **Hero Bölümü** - Ana sayfa hero içeriği
-- **Hizmetler** - Hukuki hizmetler yönetimi
-- **Ekip** - Ekip üyeleri
-- **Hakkımızda** - Büro bilgileri
-- **İletişim** - İletişim bilgileri
-- **Yorumlar** - Müvekkil yorumları
-- **Blog** - Blog yazıları
-- **Site Ayarları** - Genel site ayarları
-
-## 🔒 Güvenlik
-
-- NextAuth.js ile güvenli kimlik doğrulama
-- Middleware ile korumalı admin rotaları
-- Bcrypt ile şifrelenmiş kullanıcı parolaları
-
-## 📝 Lisans
-
-© 2024 Mürekkep Hukuk Bürosu. Tüm hakları saklıdır.
+(c) 2025 Murvet Kara Communication & Management. Tum haklari saklidir.

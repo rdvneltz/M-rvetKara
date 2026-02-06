@@ -19,9 +19,9 @@ interface FooterProps {
 }
 
 export default function Footer() {
-  const [copyrightText, setCopyrightText] = useState('© 2024 Fofora Tiyatro. Tüm hakları saklıdır.')
+  const [copyrightText, setCopyrightText] = useState('© 2024 Mürvet Kara. Tüm hakları saklıdır.')
   const [legalLinks, setLegalLinks] = useState<LegalLink[]>([])
-  const [logo, setLogo] = useState<string>('/assets/fofora-logo.png')
+  const [logo, setLogo] = useState<string>('/assets/mk-logo.png')
   const [selectedLegalContent, setSelectedLegalContent] = useState<{
     title: string
     content: string
@@ -81,7 +81,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto text-center">
           <Image
             src={logo}
-            alt="Fofora Tiyatro"
+            alt="Mürvet Kara"
             width={100}
             height={100}
             className="mx-auto mb-6"

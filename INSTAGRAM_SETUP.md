@@ -19,8 +19,8 @@ Bu rehber, Instagram postlarınızı otomatik olarak web sitenizde göstermek i�
 2. **Yeni App Oluşturun**:
    - "Uygulamalarım" → "Uygulama Oluştur"
    - Uygulama türü: **"Other"** (Diğer) veya **"None"**
-   - Uygulama adı: "Fofora Tiyatro Web"
-   - İletişim e-postası: admin@foforatiyatro.com (veya kendi mail adresiniz)
+   - Uygulama adı: "Mürvet Kara Web"
+   - İletişim e-postası: admin@murvetkara.com (veya kendi mail adresiniz)
 
 3. **Instagram Graph API Ekleyin**:
    - Dashboard → Ürün Ekle
@@ -117,7 +117,7 @@ Vercel dashboard'da "Deployments" → "Functions" → "Cron Jobs" bölümünden:
 Vercel dashboard'unda Environment Variables bölümüne şunları ekleyin:
 - `INSTAGRAM_ACCESS_TOKEN` → Instagram access token'ınız
 - `INSTAGRAM_USER_ID` → Instagram user ID'niz
-- `CRON_SECRET` → `fofora-instagram-sync-2025-secret-key` (güvenlik için)
+- `CRON_SECRET` → `murvetkara-cron-secret-key` (güvenlik için)
 
 **Not**: Cron job'lar Vercel Pro plan'da ücretsizdir. Hobby plan'da günde 1 cron job çalıştırabilirsiniz.
 

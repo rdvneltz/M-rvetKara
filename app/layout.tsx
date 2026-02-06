@@ -31,8 +31,8 @@ const gotham = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Fofora Tiyatro | Sahnenin Büyüsüyle Kendini Yeniden Keşfet",
-  description: "Fofora Tiyatro - İstanbul Üsküdar merkezli tiyatro eğitimi, drama atölyeleri ve oyunculuk kursları. 4 yaşından yetişkinlere kadar tiyatro eğitimi.",
+  title: "Mürvet Kara | Communication & Management",
+  description: "Mürvet Kara Communication & Management - Profesyonel iletişim danışmanlığı ve yönetim hizmetleri.",
 };
 
 export default function RootLayout({

@@ -9,12 +9,12 @@ async function main() {
   console.log('Current logo:', settings?.logo)
 
   if (settings) {
-    if (!settings.logo || settings.logo.includes('murekkep')) {
+    if (!settings.logo || settings.logo.includes('mk')) {
       await prisma.siteSettings.update({
         where: { id: settings.id },
-        data: { logo: '/assets/fofora-logo.png' }
+        data: { logo: '/assets/mk-logo.png' }
       })
-      console.log('✓ Logo updated to fofora-logo.png')
+      console.log('✓ Logo updated to mk-logo.png')
     } else {
       console.log('Logo already correct:', settings.logo)
     }

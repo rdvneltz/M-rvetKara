@@ -111,9 +111,9 @@ export default function InboxPage() {
 
     let message = ''
     if (type === 'reply') {
-      message = `Merhaba ${inquiry.name},\n\nFofora Tiyatro'ya gösterdiğiniz ilgi için teşekkür ederiz.\n\n"${inquiry.subject}" hakkında bilgi almak istediğinizi gördük.\n\n[Mesajınızı buraya yazın]\n\nSaygılarımızla,\nFofora Tiyatro`
+      message = `Merhaba ${inquiry.name},\n\nMürvet Kara'ya gösterdiğiniz ilgi için teşekkür ederiz.\n\n"${inquiry.subject}" hakkında bilgi almak istediğinizi gördük.\n\n[Mesajınızı buraya yazın]\n\nSaygılarımızla,\nMürvet Kara Communication & Management`
     } else {
-      message = `Merhaba ${inquiry.name},\n\nFofora Tiyatro'ya ulaştığınız için teşekkür ederiz. Talebiniz alınmıştır ve en kısa sürede sizinle iletişime geçeceğiz.\n\nSaygılarımızla,\nFofora Tiyatro`
+      message = `Merhaba ${inquiry.name},\n\nMürvet Kara'ya ulaştığınız için teşekkür ederiz. Talebiniz alınmıştır ve en kısa sürede sizinle iletişime geçeceğiz.\n\nSaygılarımızla,\nMürvet Kara Communication & Management`
     }
 
     const whatsappUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`

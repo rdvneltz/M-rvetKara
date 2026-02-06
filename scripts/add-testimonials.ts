@@ -51,7 +51,7 @@ async function main() {
     {
       name: 'Selin Yıldız',
       title: 'Çocuk Drama Atölyesi Velisi',
-      content: 'Oğlum çok utangaçtı, okuldaki gösterilere katılmaktan bile çekiniyordu. Fofora Tiyatro\'da 6 ay eğitim aldıktan sonra okul gösterisinde ana rol aldı. Bu değişimi görmek bizim için muhteşemdi.',
+      content: 'Oğlum çok utangaçtı, okuldaki gösterilere katılmaktan bile çekiniyordu. Mürvet Kara\'da 6 ay eğitim aldıktan sonra okul gösterisinde ana rol aldı. Bu değişimi görmek bizim için muhteşemdi.',
       rating: 5,
       active: true,
       order: 6,

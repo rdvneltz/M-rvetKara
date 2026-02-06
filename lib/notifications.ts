@@ -71,7 +71,7 @@ export function generateApprovalMessage(appointment: AppointmentDetails): string
 
 Sayın ${appointment.name},
 
-Mürekkep Hukuk Bürosu randevunuz onaylanmıştır.
+Randevunuz onaylanmıştır.
 
 📅 *Tarih:* ${dateStr}
 🕐 *Saat:* ${appointment.time}
@@ -79,7 +79,7 @@ ${platformText}
 
 Randevunuzdan 30 dakika önce size hatırlatma mesajı göndereceğiz.
 
-_Mürekkep Hukuk - Adaletin Kalemi_`
+_Mürvet Kara Communication & Management_`
 }
 
 /**
@@ -100,9 +100,9 @@ Sayın ${appointment.name},
 ${dateStr} tarihli, saat ${appointment.time} randevunuz iptal edilmiştir.
 
 Yeni bir randevu oluşturmak için web sitemizi ziyaret edebilirsiniz:
-🌐 https://murekkephukuk.vercel.app
+🌐 https://murvetkara.com
 
-_Mürekkep Hukuk - Adaletin Kalemi_`
+_Mürvet Kara Communication & Management_`
 }
 
 /**
@@ -141,7 +141,7 @@ Randevunuzda değişiklik yapılmıştır:
 📅 ${newDateStr}
 🕐 ${appointment.time}
 
-_Mürekkep Hukuk - Adaletin Kalemi_`
+_Mürvet Kara Communication & Management_`
 }
 
 /**
@@ -174,7 +174,7 @@ Sayın ${appointment.name},
 
 Görüşmek üzere!
 
-_Mürekkep Hukuk - Adaletin Kalemi_`
+_Mürvet Kara Communication & Management_`
 }
 
 /**

@@ -2,7 +2,7 @@
 
 ## 📋 Sistem Özeti
 
-Mürekkep Hukuk web sitesinde tam otomatik WhatsApp entegreli randevu yönetim sistemi.
+Mürvet Kara web sitesinde tam otomatik WhatsApp entegreli randevu yönetim sistemi.
 
 ## 🔄 İşleyiş Akışı
 
@@ -50,7 +50,7 @@ Mürekkep Hukuk web sitesinde tam otomatik WhatsApp entegreli randevu yönetim s
 
 Sayın [Ad Soyad],
 
-Mürekkep Hukuk Bürosu randevunuz onaylanmıştır.
+Mürvet Kara randevunuz onaylanmıştır.
 
 📅 Tarih: [Gün, Tarih]
 🕐 Saat: [Saat]
@@ -59,7 +59,7 @@ Mürekkep Hukuk Bürosu randevunuz onaylanmıştır.
 
 Randevunuzdan 30 dakika önce size hatırlatma mesajı göndereceğiz.
 
-_Mürekkep Hukuk - Adaletin Kalemi_
+_Mürvet Kara Communication & Management_
 ```
 
 3. **Meeting Link Yönetimi:**
@@ -90,7 +90,7 @@ Sayın [Ad Soyad],
 
 Görüşmek üzere!
 
-_Mürekkep Hukuk - Adaletin Kalemi_
+_Mürvet Kara Communication & Management_
 ```
 
 ### 5. Randevu İptali
@@ -108,9 +108,9 @@ Sayın [Ad Soyad],
 [Tarih] tarihli, saat [Saat] randevunuz iptal edilmiştir.
 
 Yeni bir randevu oluşturmak için web sitemizi ziyaret edebilirsiniz:
-🌐 https://murekkephukuk.vercel.app
+🌐 https://murvetkara.vercel.app
 
-_Mürekkep Hukuk - Adaletin Kalemi_
+_Mürvet Kara Communication & Management_
 ```
 
 ### 6. Tarih/Saat Değişikliği
@@ -137,7 +137,7 @@ Randevunuzda değişiklik yapılmıştır:
 📅 [Yeni Tarih]
 🕐 [Yeni Saat]
 
-_Mürekkep Hukuk - Adaletin Kalemi_
+_Mürvet Kara Communication & Management_
 ```
 
 ## 🔧 Admin Panel Özellikleri

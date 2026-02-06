@@ -137,7 +137,7 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
                 </p>
                 <p className="text-gold-400 text-sm flex items-center justify-center gap-2">
                   <Sparkles className="w-4 h-4" />
-                  Fofora Tiyatro
+                  Mürvet Kara
                 </p>
               </motion.div>
             ) : (

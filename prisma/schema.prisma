@@ -25,7 +25,7 @@ model HeroSection {
   buttonLink  String
   backgroundImage String?
   videoUrl    String?
-  logo        String?  @default("/assets/fofora-logo.png")
+  logo        String?  @default("/assets/mk-logo.png")
   logoWidth   Int      @default(200)
   logoHeight  Int      @default(200)
   showButton  Boolean  @default(true)

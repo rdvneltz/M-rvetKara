@@ -46,7 +46,7 @@ export default function VideoCallPage() {
       setLoading(false)
 
       // Redirect to Jitsi Meet directly (no 5-minute limit)
-      const roomName = `MurekkepHukuk_${appointmentId}`
+      const roomName = `MurvetKara_${appointmentId}`
       const displayName = encodeURIComponent(apt.name || 'Danışan')
       const jitsiUrl = `https://meet.jit.si/${roomName}#userInfo.displayName="${displayName}"&config.prejoinPageEnabled=true`
 

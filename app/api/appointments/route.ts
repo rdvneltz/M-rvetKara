@@ -77,7 +77,7 @@ export async function PUT(request: NextRequest) {
 
     // Auto-generate meeting link for "site" platform when approved
     if (status === 'approved' && currentAppointment.meetingPlatform === 'site' && !meetingLink) {
-      const baseUrl = process.env.NEXTAUTH_URL || 'https://murekkephukuk.vercel.app'
+      const baseUrl = process.env.NEXTAUTH_URL || 'https://murvetkara.com'
       updateData.meetingLink = `${baseUrl}/call/${id}`
     }
 

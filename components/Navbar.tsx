@@ -38,7 +38,7 @@ export default function Navbar() {
     contact: true
   })
   const [socialMediaLinks, setSocialMediaLinks] = useState<SocialMediaLink[]>([])
-  const [logo, setLogo] = useState<string>('/assets/fofora-logo.png')
+  const [logo, setLogo] = useState<string>('/assets/mk-logo.png')
 
   useEffect(() => {
     const handleScroll = () => {
@@ -136,7 +136,7 @@ export default function Navbar() {
               >
                 <Image
                   src={logo}
-                  alt="Fofora Tiyatro"
+                  alt="Mürvet Kara"
                   width={80}
                   height={80}
                   className="drop-shadow-2xl"
