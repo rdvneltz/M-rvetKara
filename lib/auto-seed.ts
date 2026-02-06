@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { prisma } from './prisma'
 import bcrypt from 'bcryptjs'
 
 let isSeeded = false
@@ -9,8 +9,6 @@ let isSeeded = false
  */
 export async function ensureSeeded() {
   if (isSeeded) return
-
-  const prisma = new PrismaClient()
 
   try {
     // Admin kullanıcı var mı kontrol et
@@ -120,7 +118,6 @@ export async function ensureSeeded() {
     console.log('[auto-seed] Admin: admin@murvetkara.com / admin123')
   } catch (error) {
     console.error('[auto-seed] Hata:', error)
-  } finally {
-    await prisma.$disconnect()
+    throw error
   }
 }

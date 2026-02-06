@@ -184,8 +184,8 @@ export default function Home() {
   useEffect(() => {
     const fetchAllData = async () => {
       try {
-        // Tüm verileri paralel olarak çek
-        const [heroRes, servicesRes, teamRes, contactRes, aboutRes, videosRes, settingsRes, testimonialsRes, blogRes, instagramRes] = await Promise.all([
+        // Tüm verileri paralel olarak çek - her biri bağımsız, biri başarısız olursa diğerleri etkilenmesin
+        const results = await Promise.allSettled([
           axios.get('/api/hero', { headers: { 'Cache-Control': 'no-cache' } }),
           axios.get('/api/services', { headers: { 'Cache-Control': 'no-cache' } }),
           axios.get('/api/team', { headers: { 'Cache-Control': 'no-cache' } }),
@@ -197,6 +197,21 @@ export default function Home() {
           axios.get('/api/blog', { headers: { 'Cache-Control': 'no-cache' } }),
           axios.get('/api/instagram-posts', { headers: { 'Cache-Control': 'no-cache' } })
         ])
+
+        const getData = (index: number) => results[index].status === 'fulfilled' ? (results[index] as any).value.data : null
+
+        const [heroRes, servicesRes, teamRes, contactRes, aboutRes, videosRes, settingsRes, testimonialsRes, blogRes, instagramRes] = [
+          { data: getData(0) },
+          { data: getData(1) },
+          { data: getData(2) },
+          { data: getData(3) },
+          { data: getData(4) },
+          { data: getData(5) },
+          { data: getData(6) },
+          { data: getData(7) },
+          { data: getData(8) },
+          { data: getData(9) },
+        ]
 
         // Hero verilerini set et
         if (heroRes.data) setHero(heroRes.data)
@@ -287,7 +302,20 @@ export default function Home() {
     return index >= 0 ? index : 999
   }
 
-  if (loading || !hero) {
+  const defaultHero: HeroData = {
+    title: 'MÜRVET KARA',
+    subtitle: 'Communication & Management',
+    description: 'Profesyonel iletişim danışmanlığı ve yönetim hizmetleri',
+    buttonText: 'Bizimle İletişime Geçin',
+    buttonLink: '#contact',
+    logo: '/assets/mk-logo.png',
+    logoWidth: 250,
+    logoHeight: 250,
+  }
+
+  const displayHero = hero || defaultHero
+
+  if (loading) {
     return (
       <div className="min-h-screen bg-navy-900 flex items-center justify-center">
         <div className="text-center">
@@ -325,10 +353,10 @@ export default function Home() {
             className="mb-12"
           >
             <Image
-              src={hero.logo || "/assets/mk-logo.png"}
+              src={displayHero.logo || "/assets/mk-logo.png"}
               alt="Mürvet Kara"
-              width={hero.logoWidth || 200}
-              height={hero.logoHeight || 200}
+              width={displayHero.logoWidth || 200}
+              height={displayHero.logoHeight || 200}
               className="mx-auto drop-shadow-2xl"
             />
           </motion.div>
@@ -347,7 +375,7 @@ export default function Home() {
               >
                 {dynamicContent?.useCustomContent && dynamicContent.title
                   ? dynamicContent.title
-                  : hero.title}
+                  : displayHero.title}
               </motion.h1>
 
               <motion.p
@@ -355,7 +383,7 @@ export default function Home() {
               >
                 {dynamicContent?.useCustomContent && dynamicContent.subtitle
                   ? dynamicContent.subtitle
-                  : hero.subtitle}
+                  : displayHero.subtitle}
               </motion.p>
 
               <motion.p
@@ -363,12 +391,12 @@ export default function Home() {
               >
                 {dynamicContent?.useCustomContent && dynamicContent.description
                   ? dynamicContent.description
-                  : hero.description}
+                  : displayHero.description}
               </motion.p>
             </motion.div>
           </AnimatePresence>
 
-          {hero.showButton !== false && (
+          {displayHero.showButton !== false && (
             <motion.button
               onClick={() => setIsAppointmentModalOpen(true)}
               initial={{ opacity: 0, y: 30 }}
@@ -378,7 +406,7 @@ export default function Home() {
               whileTap={{ scale: 0.95 }}
               className="bg-gradient-to-r from-gold-600 to-gold-500 text-white px-10 py-4 rounded-full font-semibold text-lg shadow-xl inline-flex items-center gap-2 hover:from-gold-700 hover:to-gold-600 transition-all cursor-pointer"
             >
-              {hero.buttonText}
+              {displayHero.buttonText}
               <ChevronRight className="w-5 h-5" />
             </motion.button>
           )}

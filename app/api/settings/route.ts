@@ -9,8 +9,9 @@ export async function GET() {
       orderBy: { updatedAt: 'desc' }
     })
     return NextResponse.json(settings)
-  } catch (error) {
-    return NextResponse.json({ error: 'Veri alınamadı' }, { status: 500 })
+  } catch (error: any) {
+    console.error('Settings GET error:', error)
+    return NextResponse.json({ error: 'Veri alınamadı', details: error?.message }, { status: 500 })
   }
 }
 
