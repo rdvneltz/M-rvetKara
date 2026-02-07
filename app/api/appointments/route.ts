@@ -35,16 +35,6 @@ export async function POST(request: NextRequest) {
       }
     })
 
-    // Mark slot as booked if exists
-    await prisma.availableSlot.updateMany({
-      where: {
-        date: new Date(date),
-        startTime: time,
-        isBooked: false
-      },
-      data: { isBooked: true }
-    })
-
     return NextResponse.json(appointment, { status: 201 })
   } catch (error) {
     return NextResponse.json({ error: 'Failed to create appointment' }, { status: 500 })

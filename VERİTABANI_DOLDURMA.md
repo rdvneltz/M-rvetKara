@@ -118,9 +118,8 @@ Eğer otomatik script çalıştırmak istemiyorsanız, admin panelden manuel ola
 ## ⚠️ ÖNEMLİ NOTLAR
 
 1. **Veritabanı Temizlenir**: Script çalıştığında **TÜM VERİLER SİLİNİR** ve yeniden oluşturulur!
-2. **Uygun Saatler**: Script kasıtlı olarak uygun saatleri eklemez (sizin yönetiminizde olması için)
-3. **Fotoğraflar**: Unsplash'tan demo fotoğraflar kullanılmıştır, admin panelden değiştirebilirsiniz
-4. **Randevular**: Mevcut randevular silinecektir, önce yedek alın!
+2. **Fotoğraflar**: Demo fotoğraflar kullanılmıştır, admin panelden değiştirebilirsiniz
+3. **Randevular**: Mevcut randevular silinecektir, önce yedek alın!
 
 ## 🔒 GÜVENLİK
 

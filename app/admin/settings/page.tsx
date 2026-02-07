@@ -519,7 +519,7 @@ export default function AdminSettings() {
             <li><strong>Programlar:</strong> Admin Programlar panelinden eğitim programlarını ekleyip düzenleyebilirsiniz</li>
             <li><strong>Hakkımızda:</strong> Admin Hakkımızda panelinden kurum bilgilerini güncelleyebilirsiniz</li>
             <li><strong>Ekip:</strong> Admin Ekip panelinden ekip üyelerini yönetebilirsiniz</li>
-            <li><strong>Kayıtlar:</strong> Admin Kayıtlar ve Uygun Saatler panellerinden kayıt sistemini yönetebilirsiniz</li>
+            <li><strong>Kayıtlar:</strong> Admin Kayıtlar panelinden randevu ve kayıt sistemini yönetebilirsiniz</li>
             <li><strong>Hero Videoları:</strong> Admin Videolar panelinden arka plan videolarını ve sıralarını ayarlayabilirsiniz</li>
           </ul>
         </div>

@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { LayoutDashboard, FileText, Users, Phone, Settings, Image, Star, BookOpen, Calendar, Clock, Video, Layout, UserCog, Instagram } from 'lucide-react'
+import { LayoutDashboard, FileText, Users, Phone, Settings, Image, Star, BookOpen, Calendar, Video, Layout, UserCog, Instagram } from 'lucide-react'
 import Link from 'next/link'
 import axios from 'axios'
 
@@ -68,7 +68,6 @@ export default function DashboardPage() {
     { title: 'Hakkımızda', href: '/admin/about', icon: <LayoutDashboard className="w-6 h-6" />, color: 'from-yellow-500 to-yellow-600' },
     { title: 'İletişim', href: '/admin/contact', icon: <Phone className="w-6 h-6" />, color: 'from-red-500 to-red-600' },
     { title: 'Kayıtlar', href: '/admin/appointments', icon: <Calendar className="w-6 h-6" />, color: 'from-orange-500 to-orange-600' },
-    { title: 'Uygun Saatler', href: '/admin/slots', icon: <Clock className="w-6 h-6" />, color: 'from-teal-500 to-teal-600' },
     { title: 'Yorumlar', href: '/admin/testimonials', icon: <Star className="w-6 h-6" />, color: 'from-pink-500 to-pink-600' },
     { title: 'Blog', href: '/admin/blog', icon: <BookOpen className="w-6 h-6" />, color: 'from-indigo-500 to-indigo-600' },
     { title: 'Instagram Postları', href: '/admin/instagram', icon: <Instagram className="w-6 h-6" />, color: 'from-fuchsia-500 to-purple-600' },
