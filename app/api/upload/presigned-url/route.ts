@@ -4,11 +4,11 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
 // Get R2 client
 function getR2Client() {
-  const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID || '4ad9a16037171b6689602b13bbbe6be8'
+  const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID
   const ACCESS_KEY_ID = process.env.R2_ACCESS_KEY_ID
   const SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY
 
-  if (!ACCESS_KEY_ID || !SECRET_ACCESS_KEY) {
+  if (!R2_ACCOUNT_ID || !ACCESS_KEY_ID || !SECRET_ACCESS_KEY) {
     throw new Error('R2 credentials not found')
   }
 
