@@ -29,6 +29,9 @@ model HeroSection {
   logoWidth   Int      @default(200)
   logoHeight  Int      @default(200)
   showButton  Boolean  @default(true)
+  titleColor       String?  @default("#ffffff")
+  subtitleColor    String?  @default("#ffffffE6")
+  descriptionColor String?  @default("#d4a574")
   active      Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

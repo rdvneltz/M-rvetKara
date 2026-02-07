@@ -20,6 +20,9 @@ interface HeroData {
   logoWidth?: number
   logoHeight?: number
   showButton?: boolean
+  titleColor?: string
+  subtitleColor?: string
+  descriptionColor?: string
 }
 
 interface Service {
@@ -384,7 +387,8 @@ export default function Home() {
               transition={{ duration: 0.6 }}
             >
               <motion.h1
-                className="text-6xl md:text-8xl font-bold mb-6 gradient-text"
+                className={`text-6xl md:text-8xl font-bold mb-6 ${!displayHero.titleColor ? 'gradient-text' : ''}`}
+                style={displayHero.titleColor ? { color: displayHero.titleColor } : undefined}
               >
                 {dynamicContent?.useCustomContent && dynamicContent.title
                   ? dynamicContent.title
@@ -392,7 +396,8 @@ export default function Home() {
               </motion.h1>
 
               <motion.p
-                className="text-2xl md:text-3xl text-white/90 mb-4"
+                className="text-2xl md:text-3xl mb-4"
+                style={{ color: displayHero.subtitleColor || 'rgba(255,255,255,0.9)' }}
               >
                 {dynamicContent?.useCustomContent && dynamicContent.subtitle
                   ? dynamicContent.subtitle
@@ -400,7 +405,8 @@ export default function Home() {
               </motion.p>
 
               <motion.p
-                className="text-lg md:text-xl text-gold-300 mb-12 max-w-3xl mx-auto"
+                className="text-lg md:text-xl mb-12 max-w-3xl mx-auto"
+                style={{ color: displayHero.descriptionColor || '#d4a574' }}
               >
                 {dynamicContent?.useCustomContent && dynamicContent.description
                   ? dynamicContent.description
