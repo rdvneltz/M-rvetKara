@@ -138,6 +138,7 @@ model SiteSettings {
   legalLinks  Json?   // [{title: string, content: string, active: boolean, order: number}]
   appointmentFormSettings Json? // {consultationTypes: string[], showLawyerSelection: boolean, descriptionLabel: string}
   heroVideoRandomPlay Boolean @default(false) // Random video playback order
+  heroVideoClickToChange Boolean @default(false) // Click on video to change to next
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

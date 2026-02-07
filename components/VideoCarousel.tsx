@@ -30,6 +30,7 @@ interface VideoCarouselProps {
   videoPath?: string
   fadeDuration?: number
   randomPlay?: boolean
+  clickToChange?: boolean
   onContentChange?: (content: VideoContent | null) => void
 }
 
@@ -48,6 +49,7 @@ export default function VideoCarousel({
   videoPath = '/videos',
   fadeDuration = 1200,
   randomPlay = false,
+  clickToChange = false,
   onContentChange
 }: VideoCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -293,7 +295,10 @@ export default function VideoCarousel({
       />
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-900/70 via-navy-900/60 to-navy-900/80 z-10"></div>
+      <div
+        className={`absolute inset-0 bg-gradient-to-b from-navy-900/70 via-navy-900/60 to-navy-900/80 z-10 ${clickToChange ? 'cursor-pointer' : ''}`}
+        onClick={clickToChange ? () => goToNextVideo() : undefined}
+      ></div>
     </div>
   )
 }

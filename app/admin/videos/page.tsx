@@ -56,6 +56,7 @@ export default function AdminVideos() {
     videoName: ''
   })
   const [randomPlay, setRandomPlay] = useState(false)
+  const [clickToChange, setClickToChange] = useState(false)
   const [editingVideo, setEditingVideo] = useState<HeroVideo | null>(null)
   const [saving, setSaving] = useState(false)
 
@@ -85,6 +86,7 @@ export default function AdminVideos() {
     try {
       const { data } = await axios.get('/api/settings')
       setRandomPlay(data?.heroVideoRandomPlay || false)
+      setClickToChange(data?.heroVideoClickToChange || false)
     } catch (error) {
       console.error('Failed to fetch settings', error)
     }
@@ -99,6 +101,19 @@ export default function AdminVideos() {
       setRandomPlay(newValue)
     } catch (error) {
       console.error('Failed to update random play setting', error)
+      alert('Ayar güncellenemedi')
+    }
+  }
+
+  const toggleClickToChange = async () => {
+    try {
+      const newValue = !clickToChange
+      await axios.patch('/api/settings', {
+        heroVideoClickToChange: newValue
+      })
+      setClickToChange(newValue)
+    } catch (error) {
+      console.error('Failed to update click to change setting', error)
       alert('Ayar güncellenemedi')
     }
   }
@@ -385,6 +400,23 @@ export default function AdminVideos() {
               </label>
               <span className="ml-2 text-white/40 text-sm">
                 {randomPlay ? 'Rastgele' : 'Sıralı'}
+              </span>
+            </div>
+
+            {/* Click to Change Toggle */}
+            <div className="flex items-center gap-3 bg-white/5 backdrop-blur-lg rounded-lg p-4 border border-white/10">
+              <input
+                type="checkbox"
+                id="clickToChange"
+                checked={clickToChange}
+                onChange={toggleClickToChange}
+                className="w-5 h-5 rounded border-2 border-white/30 bg-white/10 checked:bg-gold-500 checked:border-gold-500 cursor-pointer transition-all"
+              />
+              <label htmlFor="clickToChange" className="text-white font-medium cursor-pointer select-none">
+                Tıklayınca video değiştir
+              </label>
+              <span className="ml-2 text-white/40 text-sm">
+                {clickToChange ? 'Aktif' : 'Pasif'}
               </span>
             </div>
           </div>

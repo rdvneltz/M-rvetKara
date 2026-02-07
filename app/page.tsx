@@ -115,6 +115,7 @@ export default function Home() {
   const [selectedTeamMember, setSelectedTeamMember] = useState<TeamMember | null>(null)
   const [heroVideos, setHeroVideos] = useState<HeroVideoData[]>([])
   const [randomPlay, setRandomPlay] = useState(false)
+  const [clickToChange, setClickToChange] = useState(false)
   const [dynamicContent, setDynamicContent] = useState<VideoContent | null>(null)
   const [instagramPosts, setInstagramPosts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
@@ -286,6 +287,11 @@ export default function Home() {
           setRandomPlay(settingsRes.data.heroVideoRandomPlay)
         }
 
+        // Click to change ayarını set et
+        if (settingsRes.data && settingsRes.data.heroVideoClickToChange !== undefined) {
+          setClickToChange(settingsRes.data.heroVideoClickToChange)
+        }
+
         // Instagram postlarını set et
         if (instagramRes.data && instagramRes.data.length > 0) {
           const activePosts = instagramRes.data.filter((p: any) => p.active)
@@ -355,6 +361,7 @@ export default function Home() {
           videoPath="/videos/optimized"
           fadeDuration={1500}
           randomPlay={randomPlay}
+          clickToChange={clickToChange}
           onContentChange={(content) => setDynamicContent(content)}
         />
 
