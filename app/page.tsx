@@ -128,6 +128,14 @@ export default function Home() {
   const [sectionOrder, setSectionOrder] = useState<string[]>([
     'hero', 'services', 'about', 'team', 'testimonials', 'instagram', 'blog', 'contact'
   ])
+  const [sectionNames, setSectionNames] = useState<Record<string, string>>({
+    services: 'Programlar',
+    about: 'Hakkımızda',
+    team: 'Ekip',
+    testimonials: 'Yorumlar',
+    blog: 'Blog',
+    contact: 'İletişim',
+  })
 
   // Prevent body scroll when blog modal is open
   useEffect(() => {
@@ -263,6 +271,11 @@ export default function Home() {
         // Section order ayarlarını set et
         if (settingsRes.data && settingsRes.data.sectionOrder) {
           setSectionOrder(settingsRes.data.sectionOrder)
+        }
+
+        // Section names ayarlarını set et
+        if (settingsRes.data && settingsRes.data.sectionNames) {
+          setSectionNames(prev => ({ ...prev, ...settingsRes.data.sectionNames }))
         }
 
         // Random play ayarını set et
@@ -446,10 +459,10 @@ export default function Home() {
             className="text-center mb-16"
             style={{ transformStyle: "preserve-3d" }}
           >
-            <h2 className="text-5xl font-bold text-white mb-4">Eğitim Programlarımız</h2>
+            <h2 className="text-5xl font-bold text-white mb-4">{sectionNames.services || 'Programlar'}</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-gold-600 to-gold-400 mx-auto mb-6"></div>
             <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              Her yaş grubuna özel profesyonel tiyatro ve drama eğitimleri
+              Profesyonel iletişim danışmanlığı ve yönetim hizmetleri
             </p>
           </motion.div>
 
@@ -539,7 +552,7 @@ export default function Home() {
               </motion.div>
             )) : (
               <div className="col-span-3 text-center text-white/70">
-                Henüz eğitim programı eklenmemiş. Admin panelden program ekleyebilirsiniz.
+                Henüz içerik eklenmemiş. Admin panelden ekleyebilirsiniz.
               </div>
             )}
           </div>
@@ -696,7 +709,7 @@ export default function Home() {
               }}
               className="text-center mb-16"
             >
-              <h2 className="text-5xl font-bold text-white mb-4">Ekibimiz</h2>
+              <h2 className="text-5xl font-bold text-white mb-4">{sectionNames.team || 'Ekip'}</h2>
               <div className="w-24 h-1 bg-gradient-to-r from-gold-600 to-gold-400 mx-auto"></div>
             </motion.div>
 
@@ -761,7 +774,7 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl font-bold text-white mb-4">Öğrenci Yorumları</h2>
+            <h2 className="text-5xl font-bold text-white mb-4">{sectionNames.testimonials || 'Yorumlar'}</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-gold-600 to-gold-400 mx-auto"></div>
           </motion.div>
 
@@ -828,10 +841,10 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-5xl font-bold text-white mb-4">Instagram'da Bizi Takip Edin</h2>
+            <h2 className="text-5xl font-bold text-white mb-4">{sectionNames.instagram || 'Instagram'}</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-gold-600 to-gold-400 mx-auto mb-6"></div>
             <p className="text-white/70 text-lg max-w-2xl mx-auto mb-12">
-              Atölyelerimizden kareler, öğrencilerimizin başarıları ve tiyatro dünyasından haberler için Instagram sayfamızı ziyaret edin!
+              Bizi Instagram'da takip edin!
             </p>
 
             <motion.a
@@ -909,10 +922,10 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl font-bold text-white mb-4">Tiyatro Blogu</h2>
+            <h2 className="text-5xl font-bold text-white mb-4">{sectionNames.blog || 'Blog'}</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-gold-600 to-gold-400 mx-auto mb-6"></div>
             <p className="text-white/70 text-lg max-w-2xl mx-auto">
-              Tiyatro dünyasından haberler, etkinliklerimiz ve oyunlarımız
+              Haberler, etkinlikler ve duyurular
             </p>
           </motion.div>
 
@@ -993,10 +1006,10 @@ export default function Home() {
             }}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl font-bold text-white mb-4">İletişim</h2>
+            <h2 className="text-5xl font-bold text-white mb-4">{sectionNames.contact || 'İletişim'}</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-gold-600 to-gold-400 mx-auto mb-6"></div>
             <p className="text-xl text-white/70">
-              Kurslarımız hakkında bilgi almak için bizimle iletişime geçin
+              Bizimle iletişime geçin
             </p>
           </motion.div>
 

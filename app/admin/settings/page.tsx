@@ -31,6 +31,17 @@ interface SiteSettings {
     contact: boolean
   }
   sectionOrder?: string[]
+  sectionNames?: Record<string, string>
+}
+
+const DEFAULT_SECTION_NAMES: Record<string, string> = {
+  services: 'Programlar',
+  about: 'Hakkımızda',
+  team: 'Ekip',
+  testimonials: 'Yorumlar',
+  instagram: 'Instagram',
+  blog: 'Blog',
+  contact: 'İletişim',
 }
 
 export default function AdminSettings() {
@@ -57,7 +68,8 @@ export default function AdminSettings() {
       blog: true,
       contact: true
     },
-    sectionOrder: ['hero', 'services', 'about', 'team', 'testimonials', 'instagram', 'blog', 'contact']
+    sectionOrder: ['hero', 'services', 'about', 'team', 'testimonials', 'instagram', 'blog', 'contact'],
+    sectionNames: { ...DEFAULT_SECTION_NAMES }
   })
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -97,7 +109,8 @@ export default function AdminSettings() {
             blog: true,
             contact: true
           },
-          sectionOrder: data.sectionOrder || ['hero', 'services', 'about', 'team', 'testimonials', 'instagram', 'blog', 'contact']
+          sectionOrder: data.sectionOrder || ['hero', 'services', 'about', 'team', 'testimonials', 'instagram', 'blog', 'contact'],
+          sectionNames: { ...DEFAULT_SECTION_NAMES, ...(data.sectionNames || {}) }
         })
       }
     } catch (error) {
@@ -126,17 +139,18 @@ export default function AdminSettings() {
   }
 
   const getSectionName = (sectionId: string) => {
-    const labels: Record<string, string> = {
-      hero: 'Hero Bölümü',
-      services: 'Programlar',
-      about: 'Hakkımızda',
-      team: 'Ekip',
-      testimonials: 'Yorumlar',
-      instagram: 'Instagram',
-      blog: 'Blog',
-      contact: 'İletişim'
-    }
-    return labels[sectionId] || sectionId
+    if (sectionId === 'hero') return 'Hero Bölümü'
+    return settings.sectionNames?.[sectionId] || DEFAULT_SECTION_NAMES[sectionId] || sectionId
+  }
+
+  const updateSectionName = (sectionId: string, name: string) => {
+    setSettings({
+      ...settings,
+      sectionNames: {
+        ...settings.sectionNames,
+        [sectionId]: name
+      }
+    })
   }
 
   const toggleSectionVisibility = (sectionKey: string) => {
@@ -321,64 +335,80 @@ export default function AdminSettings() {
           <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10">
             <h3 className="text-2xl font-bold text-white mb-4">Sayfa Bölümleri Yönetimi</h3>
             <p className="text-white/60 text-sm mb-6">
-              Bölümlerin görünürlüğünü ve sırasını buradan yönetebilirsiniz.
-              Yukarı/aşağı ok tuşları ile sıralamayı, toggle ile görünürlüğü ayarlayın.
+              Bölümlerin isimlerini, görünürlüğünü ve sırasını buradan yönetebilirsiniz.
+              İsim alanını düzenleyerek navbar ve sayfa başlıklarını değiştirebilirsiniz.
             </p>
 
             <div className="space-y-3">
               {settings.sectionOrder?.map((sectionKey, index) => (
                 <motion.div
                   key={sectionKey}
-                  className="bg-white/5 rounded-lg p-4 border border-white/10 flex items-center gap-4"
+                  className="bg-white/5 rounded-lg p-4 border border-white/10"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.05 }}
                 >
-                  {/* Order number */}
-                  <div className="text-white/40 font-bold text-lg min-w-[30px]">
-                    {index + 1}
-                  </div>
+                  <div className="flex items-center gap-4">
+                    {/* Order number */}
+                    <div className="text-white/40 font-bold text-lg min-w-[30px]">
+                      {index + 1}
+                    </div>
 
-                  {/* Section name */}
-                  <div className="flex-1 text-white font-medium">
-                    {getSectionName(sectionKey)}
-                  </div>
+                    {/* Section name - editable for non-hero sections */}
+                    <div className="flex-1">
+                      {sectionKey === 'hero' ? (
+                        <span className="text-white font-medium">Hero Bölümü</span>
+                      ) : (
+                        <input
+                          type="text"
+                          value={settings.sectionNames?.[sectionKey] || DEFAULT_SECTION_NAMES[sectionKey] || ''}
+                          onChange={(e) => updateSectionName(sectionKey, e.target.value)}
+                          className="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-gold-500 text-sm"
+                          placeholder={DEFAULT_SECTION_NAMES[sectionKey]}
+                        />
+                      )}
+                    </div>
 
-                  {/* Visibility toggle */}
-                  <button
-                    type="button"
-                    onClick={() => toggleSectionVisibility(sectionKey)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium border-2 transition-all ${
-                      settings.sectionVisibility?.[sectionKey as keyof typeof settings.sectionVisibility]
-                        ? 'bg-green-500/20 text-green-400 border-green-500/50'
-                        : 'bg-gray-500/20 text-gray-400 border-gray-500/50'
-                    }`}
-                  >
-                    {settings.sectionVisibility?.[sectionKey as keyof typeof settings.sectionVisibility] ? 'Aktif' : 'Pasif'}
-                  </button>
-
-                  {/* Order controls */}
-                  <div className="flex gap-1">
+                    {/* Visibility toggle */}
                     <button
                       type="button"
-                      onClick={() => moveSectionUp(index)}
-                      disabled={index === 0}
-                      className="p-2 rounded-lg bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                      onClick={() => toggleSectionVisibility(sectionKey)}
+                      className={`px-4 py-2 rounded-lg text-sm font-medium border-2 transition-all whitespace-nowrap ${
+                        settings.sectionVisibility?.[sectionKey as keyof typeof settings.sectionVisibility]
+                          ? 'bg-green-500/20 text-green-400 border-green-500/50'
+                          : 'bg-gray-500/20 text-gray-400 border-gray-500/50'
+                      }`}
                     >
-                      <ChevronUp className="w-5 h-5 text-white" />
+                      {settings.sectionVisibility?.[sectionKey as keyof typeof settings.sectionVisibility] ? 'Aktif' : 'Pasif'}
                     </button>
-                    <button
-                      type="button"
-                      onClick={() => moveSectionDown(index)}
-                      disabled={index === settings.sectionOrder!.length - 1}
-                      className="p-2 rounded-lg bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-                    >
-                      <ChevronDown className="w-5 h-5 text-white" />
-                    </button>
+
+                    {/* Order controls */}
+                    <div className="flex gap-1">
+                      <button
+                        type="button"
+                        onClick={() => moveSectionUp(index)}
+                        disabled={index === 0}
+                        className="p-2 rounded-lg bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                      >
+                        <ChevronUp className="w-5 h-5 text-white" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => moveSectionDown(index)}
+                        disabled={index === settings.sectionOrder!.length - 1}
+                        className="p-2 rounded-lg bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                      >
+                        <ChevronDown className="w-5 h-5 text-white" />
+                      </button>
+                    </div>
                   </div>
                 </motion.div>
               ))}
             </div>
+
+            <p className="text-white/40 text-sm mt-4">
+              Not: İçeriği boş olan bölümler (henüz kayıt eklenmemiş) navbar'da otomatik olarak gizlenir.
+            </p>
           </div>
 
           {/* Social Media Links */}

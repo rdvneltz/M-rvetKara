@@ -23,6 +23,15 @@ interface SocialMediaLink {
   active: boolean
 }
 
+const DEFAULT_SECTION_NAMES: Record<string, string> = {
+  services: 'Programlar',
+  about: 'Hakkımızda',
+  team: 'Ekip',
+  testimonials: 'Yorumlar',
+  blog: 'Blog',
+  contact: 'İletişim',
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [showLogo, setShowLogo] = useState(false)
@@ -37,6 +46,11 @@ export default function Navbar() {
     blog: true,
     contact: true
   })
+  const [sectionHasData, setSectionHasData] = useState<Record<string, boolean>>({
+    hero: true, services: true, about: true, team: true,
+    testimonials: true, instagram: true, blog: true, contact: true
+  })
+  const [sectionNames, setSectionNames] = useState<Record<string, string>>(DEFAULT_SECTION_NAMES)
   const [socialMediaLinks, setSocialMediaLinks] = useState<SocialMediaLink[]>([])
   const [logo, setLogo] = useState<string>('/assets/mk-logo.png')
 
@@ -46,37 +60,39 @@ export default function Navbar() {
       const heroHeight = window.innerHeight
 
       setScrolled(scrollPosition > 50)
-      setShowLogo(scrollPosition > heroHeight * 0.7) // Show logo after 70% of hero section
+      setShowLogo(scrollPosition > heroHeight * 0.7)
     }
 
-    handleScroll() // Initial check
+    handleScroll()
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   useEffect(() => {
-    const fetchSettings = async () => {
+    const fetchData = async () => {
       try {
-        const res = await axios.get('/api/settings')
-        if (res.data && res.data.sectionVisibility) {
-          setSectionVisibility(res.data.sectionVisibility)
+        const [settingsRes, statusRes] = await Promise.allSettled([
+          axios.get('/api/settings'),
+          axios.get('/api/section-status'),
+        ])
+
+        if (settingsRes.status === 'fulfilled' && settingsRes.value.data) {
+          const data = settingsRes.value.data
+          if (data.sectionVisibility) setSectionVisibility(data.sectionVisibility)
+          if (data.sectionNames) setSectionNames({ ...DEFAULT_SECTION_NAMES, ...data.sectionNames })
+          if (data.socialMedia && Array.isArray(data.socialMedia)) setSocialMediaLinks(data.socialMedia)
+          if (data.logo) setLogo(data.logo)
         }
-        if (res.data && res.data.socialMedia) {
-          // Ensure socialMedia is an array
-          const socialMedia = Array.isArray(res.data.socialMedia)
-            ? res.data.socialMedia
-            : []
-          setSocialMediaLinks(socialMedia)
-        }
-        if (res.data && res.data.logo) {
-          setLogo(res.data.logo)
+
+        if (statusRes.status === 'fulfilled' && statusRes.value.data) {
+          setSectionHasData(statusRes.value.data)
         }
       } catch (error) {
-        console.error('Failed to fetch navbar settings:', error)
+        console.error('Failed to fetch navbar data:', error)
       }
     }
 
-    fetchSettings()
+    fetchData()
   }, [])
 
   const scrollToSection = (id: string) => {
@@ -87,7 +103,7 @@ export default function Navbar() {
         top: offsetTop,
         behavior: 'smooth'
       })
-      setMobileMenuOpen(false) // Close mobile menu after clicking
+      setMobileMenuOpen(false)
     }
   }
 
@@ -103,13 +119,16 @@ export default function Navbar() {
   }
 
   const navItems = [
-    { id: 'services', label: 'Programlar', visible: sectionVisibility.services },
-    { id: 'about', label: 'Hakkımızda', visible: sectionVisibility.about },
-    { id: 'team', label: 'Ekip', visible: sectionVisibility.team },
-    { id: 'testimonials', label: 'Yorumlar', visible: sectionVisibility.testimonials },
-    { id: 'blog', label: 'Blog', visible: sectionVisibility.blog },
-    { id: 'contact', label: 'İletişim', visible: sectionVisibility.contact },
-  ].filter(item => item.visible)
+    { id: 'services', label: sectionNames.services || DEFAULT_SECTION_NAMES.services },
+    { id: 'about', label: sectionNames.about || DEFAULT_SECTION_NAMES.about },
+    { id: 'team', label: sectionNames.team || DEFAULT_SECTION_NAMES.team },
+    { id: 'testimonials', label: sectionNames.testimonials || DEFAULT_SECTION_NAMES.testimonials },
+    { id: 'blog', label: sectionNames.blog || DEFAULT_SECTION_NAMES.blog },
+    { id: 'contact', label: sectionNames.contact || DEFAULT_SECTION_NAMES.contact },
+  ].filter(item => {
+    const key = item.id as keyof SectionVisibility
+    return sectionVisibility[key] && sectionHasData[item.id]
+  })
 
   return (
     <motion.nav

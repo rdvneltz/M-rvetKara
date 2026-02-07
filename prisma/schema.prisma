@@ -130,6 +130,7 @@ model SiteSettings {
   socialMedia Json?
   sectionVisibility Json? // {hero: true, services: true, about: true, team: true, contact: true}
   sectionOrder Json? // ["hero", "services", "about", "team", "testimonials", "instagram", "blog", "contact"]
+  sectionNames Json? // {services: "Programlar", about: "Hakkımızda", team: "Ekip", ...}
   copyrightText String? // Customizable copyright text
   legalLinks  Json?   // [{title: string, content: string, active: boolean, order: number}]
   appointmentFormSettings Json? // {consultationTypes: string[], showLawyerSelection: boolean, descriptionLabel: string}
