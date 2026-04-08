@@ -140,6 +140,16 @@ export default function Home() {
     blog: 'Blog',
     contact: 'İletişim',
   })
+  const [sectionSubtitles, setSectionSubtitles] = useState<Record<string, string>>({
+    services: 'Profesyonel iletişim danışmanlığı ve yönetim hizmetleri',
+    about: '',
+    team: '',
+    testimonials: '',
+    instagram: 'Bizi Instagram\'da takip edin!',
+    blog: 'Haberler, etkinlikler ve duyurular',
+    contact: 'Bizimle iletişime geçin',
+  })
+  const [socialMedia, setSocialMedia] = useState<any[]>([])
 
   // Prevent body scroll when blog modal is open
   useEffect(() => {
@@ -280,6 +290,16 @@ export default function Home() {
         // Section names ayarlarını set et
         if (settingsRes.data && settingsRes.data.sectionNames) {
           setSectionNames(prev => ({ ...prev, ...settingsRes.data.sectionNames }))
+        }
+
+        // Section subtitles ayarlarını set et
+        if (settingsRes.data && settingsRes.data.sectionSubtitles) {
+          setSectionSubtitles(prev => ({ ...prev, ...settingsRes.data.sectionSubtitles }))
+        }
+
+        // Social media ayarlarını set et
+        if (settingsRes.data && settingsRes.data.socialMedia) {
+          setSocialMedia(settingsRes.data.socialMedia)
         }
 
         // Random play ayarını set et
@@ -474,9 +494,11 @@ export default function Home() {
           >
             <h2 className="text-5xl font-bold text-white mb-4">{sectionNames.services || 'Programlar'}</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-gold-600 to-gold-400 mx-auto mb-6"></div>
-            <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              Profesyonel iletişim danışmanlığı ve yönetim hizmetleri
-            </p>
+            {sectionSubtitles.services && (
+              <p className="text-xl text-white/70 max-w-3xl mx-auto">
+                {sectionSubtitles.services}
+              </p>
+            )}
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -723,7 +745,10 @@ export default function Home() {
               className="text-center mb-16"
             >
               <h2 className="text-5xl font-bold text-white mb-4">{sectionNames.team || 'Ekip'}</h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-gold-600 to-gold-400 mx-auto"></div>
+              <div className="w-24 h-1 bg-gradient-to-r from-gold-600 to-gold-400 mx-auto mb-6"></div>
+              {sectionSubtitles.team && (
+                <p className="text-xl text-white/70 max-w-3xl mx-auto">{sectionSubtitles.team}</p>
+              )}
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -788,7 +813,10 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-5xl font-bold text-white mb-4">{sectionNames.testimonials || 'Yorumlar'}</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-gold-600 to-gold-400 mx-auto"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-gold-600 to-gold-400 mx-auto mb-6"></div>
+            {sectionSubtitles.testimonials && (
+              <p className="text-xl text-white/70 max-w-3xl mx-auto">{sectionSubtitles.testimonials}</p>
+            )}
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -856,12 +884,14 @@ export default function Home() {
           >
             <h2 className="text-5xl font-bold text-white mb-4">{sectionNames.instagram || 'Instagram'}</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-gold-600 to-gold-400 mx-auto mb-6"></div>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto mb-12">
-              Bizi Instagram'da takip edin!
-            </p>
+            {sectionSubtitles.instagram && (
+              <p className="text-white/70 text-lg max-w-2xl mx-auto mb-12">
+                {sectionSubtitles.instagram}
+              </p>
+            )}
 
             <motion.a
-              href=""
+              href={socialMedia?.find((s: any) => s.platform === 'instagram')?.url || '#'}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
@@ -869,7 +899,14 @@ export default function Home() {
               className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:from-purple-700 hover:to-pink-700 transition-all"
             >
               <Instagram className="w-6 h-6" />
-              @murvetkara
+              {(() => {
+                const igUrl = socialMedia?.find((s: any) => s.platform === 'instagram')?.url
+                if (igUrl) {
+                  const handle = igUrl.split('/').filter(Boolean).pop()
+                  return `@${handle}`
+                }
+                return '@instagram'
+              })()}
             </motion.a>
 
             {instagramPosts.length > 0 ? (
@@ -903,7 +940,7 @@ export default function Home() {
                 {[1, 2, 3, 4].map((index) => (
                   <motion.a
                     key={index}
-                    href=""
+                    href={socialMedia?.find((s: any) => s.platform === 'instagram')?.url || '#'}
                     target="_blank"
                     rel="noopener noreferrer"
                     initial={{ opacity: 0, scale: 0.8 }}
@@ -937,9 +974,11 @@ export default function Home() {
           >
             <h2 className="text-5xl font-bold text-white mb-4">{sectionNames.blog || 'Blog'}</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-gold-600 to-gold-400 mx-auto mb-6"></div>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
-              Haberler, etkinlikler ve duyurular
-            </p>
+            {sectionSubtitles.blog && (
+              <p className="text-white/70 text-lg max-w-2xl mx-auto">
+                {sectionSubtitles.blog}
+              </p>
+            )}
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -1021,9 +1060,11 @@ export default function Home() {
           >
             <h2 className="text-5xl font-bold text-white mb-4">{sectionNames.contact || 'İletişim'}</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-gold-600 to-gold-400 mx-auto mb-6"></div>
-            <p className="text-xl text-white/70">
-              Bizimle iletişime geçin
-            </p>
+            {sectionSubtitles.contact && (
+              <p className="text-xl text-white/70">
+                {sectionSubtitles.contact}
+              </p>
+            )}
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

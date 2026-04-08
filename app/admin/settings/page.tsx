@@ -32,6 +32,7 @@ interface SiteSettings {
   }
   sectionOrder?: string[]
   sectionNames?: Record<string, string>
+  sectionSubtitles?: Record<string, string>
 }
 
 const DEFAULT_SECTION_NAMES: Record<string, string> = {
@@ -42,6 +43,16 @@ const DEFAULT_SECTION_NAMES: Record<string, string> = {
   instagram: 'Instagram',
   blog: 'Blog',
   contact: 'İletişim',
+}
+
+const DEFAULT_SECTION_SUBTITLES: Record<string, string> = {
+  services: 'Profesyonel iletişim danışmanlığı ve yönetim hizmetleri',
+  about: '',
+  team: '',
+  testimonials: '',
+  instagram: 'Bizi Instagram\'da takip edin!',
+  blog: 'Haberler, etkinlikler ve duyurular',
+  contact: 'Bizimle iletişime geçin',
 }
 
 export default function AdminSettings() {
@@ -69,7 +80,8 @@ export default function AdminSettings() {
       contact: true
     },
     sectionOrder: ['hero', 'services', 'about', 'team', 'testimonials', 'instagram', 'blog', 'contact'],
-    sectionNames: { ...DEFAULT_SECTION_NAMES }
+    sectionNames: { ...DEFAULT_SECTION_NAMES },
+    sectionSubtitles: { ...DEFAULT_SECTION_SUBTITLES }
   })
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -110,7 +122,8 @@ export default function AdminSettings() {
             contact: true
           },
           sectionOrder: data.sectionOrder || ['hero', 'services', 'about', 'team', 'testimonials', 'instagram', 'blog', 'contact'],
-          sectionNames: { ...DEFAULT_SECTION_NAMES, ...(data.sectionNames || {}) }
+          sectionNames: { ...DEFAULT_SECTION_NAMES, ...(data.sectionNames || {}) },
+          sectionSubtitles: { ...DEFAULT_SECTION_SUBTITLES, ...(data.sectionSubtitles || {}) }
         })
       }
     } catch (error) {
@@ -149,6 +162,16 @@ export default function AdminSettings() {
       sectionNames: {
         ...settings.sectionNames,
         [sectionId]: name
+      }
+    })
+  }
+
+  const updateSectionSubtitle = (sectionId: string, subtitle: string) => {
+    setSettings({
+      ...settings,
+      sectionSubtitles: {
+        ...settings.sectionSubtitles,
+        [sectionId]: subtitle
       }
     })
   }
@@ -335,8 +358,8 @@ export default function AdminSettings() {
           <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10">
             <h3 className="text-2xl font-bold text-white mb-4">Sayfa Bölümleri Yönetimi</h3>
             <p className="text-white/60 text-sm mb-6">
-              Bölümlerin isimlerini, görünürlüğünü ve sırasını buradan yönetebilirsiniz.
-              İsim alanını düzenleyerek navbar ve sayfa başlıklarını değiştirebilirsiniz.
+              Bölümlerin isimlerini, alt başlıklarını, görünürlüğünü ve sırasını buradan yönetebilirsiniz.
+              İsim alanını düzenleyerek navbar ve sayfa başlıklarını, alt başlık alanını düzenleyerek bölüm açıklamalarını değiştirebilirsiniz.
             </p>
 
             <div className="space-y-3">
@@ -354,18 +377,33 @@ export default function AdminSettings() {
                       {index + 1}
                     </div>
 
-                    {/* Section name - editable for non-hero sections */}
+                    {/* Section name & subtitle - editable for non-hero sections */}
                     <div className="flex-1">
                       {sectionKey === 'hero' ? (
                         <span className="text-white font-medium">Hero Bölümü</span>
                       ) : (
-                        <input
-                          type="text"
-                          value={settings.sectionNames?.[sectionKey] || DEFAULT_SECTION_NAMES[sectionKey] || ''}
-                          onChange={(e) => updateSectionName(sectionKey, e.target.value)}
-                          className="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-gold-500 text-sm"
-                          placeholder={DEFAULT_SECTION_NAMES[sectionKey]}
-                        />
+                        <div className="space-y-2">
+                          <div>
+                            <label className="block text-white/50 text-xs mb-1">Başlık</label>
+                            <input
+                              type="text"
+                              value={settings.sectionNames?.[sectionKey] || DEFAULT_SECTION_NAMES[sectionKey] || ''}
+                              onChange={(e) => updateSectionName(sectionKey, e.target.value)}
+                              className="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-gold-500 text-sm"
+                              placeholder={DEFAULT_SECTION_NAMES[sectionKey]}
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-white/50 text-xs mb-1">Alt Başlık</label>
+                            <input
+                              type="text"
+                              value={settings.sectionSubtitles?.[sectionKey] || ''}
+                              onChange={(e) => updateSectionSubtitle(sectionKey, e.target.value)}
+                              className="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white/80 placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-gold-500 text-sm"
+                              placeholder={DEFAULT_SECTION_SUBTITLES[sectionKey] || 'Alt başlık (opsiyonel)'}
+                            />
+                          </div>
+                        </div>
                       )}
                     </div>
 
