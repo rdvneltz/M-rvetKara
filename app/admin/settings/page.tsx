@@ -382,21 +382,27 @@ export default function AdminSettings() {
                       {sectionKey === 'hero' ? (
                         <span className="text-white font-medium">Hero Bölümü</span>
                       ) : (
-                        <div className="space-y-1">
-                          <input
-                            type="text"
-                            value={settings.sectionNames?.[sectionKey] || DEFAULT_SECTION_NAMES[sectionKey] || ''}
-                            onChange={(e) => updateSectionName(sectionKey, e.target.value)}
-                            className="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-gold-500 text-sm"
-                            placeholder={DEFAULT_SECTION_NAMES[sectionKey]}
-                          />
-                          <input
-                            type="text"
-                            value={settings.sectionSubtitles?.[sectionKey] || ''}
-                            onChange={(e) => updateSectionSubtitle(sectionKey, e.target.value)}
-                            className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white/70 placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-gold-500 text-xs"
-                            placeholder={DEFAULT_SECTION_SUBTITLES[sectionKey] || 'Alt başlık (opsiyonel)'}
-                          />
+                        <div className="space-y-2">
+                          <div>
+                            <label className="block text-white/50 text-xs mb-1">Başlık</label>
+                            <input
+                              type="text"
+                              value={settings.sectionNames?.[sectionKey] || DEFAULT_SECTION_NAMES[sectionKey] || ''}
+                              onChange={(e) => updateSectionName(sectionKey, e.target.value)}
+                              className="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-gold-500 text-sm"
+                              placeholder={DEFAULT_SECTION_NAMES[sectionKey]}
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-white/50 text-xs mb-1">Alt Başlık</label>
+                            <input
+                              type="text"
+                              value={settings.sectionSubtitles?.[sectionKey] || ''}
+                              onChange={(e) => updateSectionSubtitle(sectionKey, e.target.value)}
+                              className="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white/80 placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-gold-500 text-sm"
+                              placeholder={DEFAULT_SECTION_SUBTITLES[sectionKey] || 'Alt başlık (opsiyonel)'}
+                            />
+                          </div>
                         </div>
                       )}
                     </div>
