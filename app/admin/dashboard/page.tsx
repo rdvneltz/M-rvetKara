@@ -17,6 +17,15 @@ export default function DashboardPage() {
     pendingAppointments: 0,
     testimonials: 0
   })
+  const [sectionNames, setSectionNames] = useState<Record<string, string>>({
+    services: 'Programlar',
+    about: 'Hakkımızda',
+    team: 'Ekip',
+    testimonials: 'Yorumlar',
+    instagram: 'Instagram',
+    blog: 'Blog',
+    contact: 'İletişim',
+  })
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -32,12 +41,13 @@ export default function DashboardPage() {
 
   const fetchStats = async () => {
     try {
-      const [servicesRes, teamRes, blogRes, appointmentsRes, testimonialsRes] = await Promise.all([
+      const [servicesRes, teamRes, blogRes, appointmentsRes, testimonialsRes, settingsRes] = await Promise.all([
         axios.get('/api/services'),
         axios.get('/api/team'),
         axios.get('/api/blog?admin=true'),
         axios.get('/api/appointments'),
-        axios.get('/api/testimonials')
+        axios.get('/api/testimonials'),
+        axios.get('/api/settings')
       ])
 
       setStats({
@@ -47,6 +57,10 @@ export default function DashboardPage() {
         pendingAppointments: appointmentsRes.data.filter((a: any) => a.status === 'pending').length,
         testimonials: testimonialsRes.data.length
       })
+
+      if (settingsRes.data?.sectionNames) {
+        setSectionNames(prev => ({ ...prev, ...settingsRes.data.sectionNames }))
+      }
     } catch (error) {
       console.error('İstatistikler yüklenemedi', error)
     }
@@ -63,14 +77,14 @@ export default function DashboardPage() {
   const menuItems = [
     { title: 'Hero Bölümü', href: '/admin/hero', icon: <Image className="w-6 h-6" />, color: 'from-blue-500 to-blue-600' },
     { title: 'Hero Videoları', href: '/admin/videos', icon: <Video className="w-6 h-6" />, color: 'from-cyan-500 to-cyan-600' },
-    { title: 'Programlar', href: '/admin/services', icon: <FileText className="w-6 h-6" />, color: 'from-green-500 to-green-600' },
-    { title: 'Ekip', href: '/admin/team', icon: <Users className="w-6 h-6" />, color: 'from-purple-500 to-purple-600' },
-    { title: 'Hakkımızda', href: '/admin/about', icon: <LayoutDashboard className="w-6 h-6" />, color: 'from-yellow-500 to-yellow-600' },
-    { title: 'İletişim', href: '/admin/contact', icon: <Phone className="w-6 h-6" />, color: 'from-red-500 to-red-600' },
+    { title: sectionNames.services || 'Programlar', href: '/admin/services', icon: <FileText className="w-6 h-6" />, color: 'from-green-500 to-green-600' },
+    { title: sectionNames.team || 'Ekip', href: '/admin/team', icon: <Users className="w-6 h-6" />, color: 'from-purple-500 to-purple-600' },
+    { title: sectionNames.about || 'Hakkımızda', href: '/admin/about', icon: <LayoutDashboard className="w-6 h-6" />, color: 'from-yellow-500 to-yellow-600' },
+    { title: sectionNames.contact || 'İletişim', href: '/admin/contact', icon: <Phone className="w-6 h-6" />, color: 'from-red-500 to-red-600' },
     { title: 'Kayıtlar', href: '/admin/appointments', icon: <Calendar className="w-6 h-6" />, color: 'from-orange-500 to-orange-600' },
-    { title: 'Yorumlar', href: '/admin/testimonials', icon: <Star className="w-6 h-6" />, color: 'from-pink-500 to-pink-600' },
-    { title: 'Blog', href: '/admin/blog', icon: <BookOpen className="w-6 h-6" />, color: 'from-indigo-500 to-indigo-600' },
-    { title: 'Instagram Postları', href: '/admin/instagram', icon: <Instagram className="w-6 h-6" />, color: 'from-fuchsia-500 to-purple-600' },
+    { title: sectionNames.testimonials || 'Yorumlar', href: '/admin/testimonials', icon: <Star className="w-6 h-6" />, color: 'from-pink-500 to-pink-600' },
+    { title: sectionNames.blog || 'Blog', href: '/admin/blog', icon: <BookOpen className="w-6 h-6" />, color: 'from-indigo-500 to-indigo-600' },
+    { title: (sectionNames.instagram || 'Instagram') + ' Postları', href: '/admin/instagram', icon: <Instagram className="w-6 h-6" />, color: 'from-fuchsia-500 to-purple-600' },
     { title: 'Footer', href: '/admin/footer', icon: <Layout className="w-6 h-6" />, color: 'from-slate-500 to-slate-600' },
     { title: 'Site Ayarları', href: '/admin/settings', icon: <Settings className="w-6 h-6" />, color: 'from-gray-500 to-gray-600' },
   ]

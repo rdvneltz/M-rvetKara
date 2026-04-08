@@ -105,6 +105,15 @@ export async function ensureSeeded() {
             contact: true,
           },
           sectionOrder: ['hero', 'services', 'about', 'team', 'testimonials', 'blog', 'contact'],
+          sectionSubtitles: {
+            services: 'Profesyonel iletişim danışmanlığı ve yönetim hizmetleri',
+            about: '',
+            team: '',
+            testimonials: '',
+            instagram: 'Bizi Instagram\'da takip edin!',
+            blog: 'Haberler, etkinlikler ve duyurular',
+            contact: 'Bizimle iletişime geçin',
+          },
           copyrightText: '© 2025 Mürvet Kara Communication & Management. Tüm hakları saklıdır.',
           appointmentFormSettings: {
             consultationTypes: ['Genel Bilgi'],
